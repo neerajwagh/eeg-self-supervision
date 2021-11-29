@@ -11,7 +11,7 @@ from sklearn.metrics import (balanced_accuracy_score, classification_report,
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from ablition_models import (BarlowTwinsContrastiveTripletNet,
+from ablation_models import (BarlowTwinsContrastiveTripletNet,
                              BarlowTwinsDBRatioNet, ContrastiveTripletNet,
                              DBRatioContrastiveNet, FullSSLNet)
 from datasets import Dataset

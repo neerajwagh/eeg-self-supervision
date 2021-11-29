@@ -6,7 +6,7 @@ import argparse
 import parser
 import torch.nn.functional as F
 
-from ablition_models import BarlowTwinsDBRatioNet, ContrastiveTripletNet, DBRatioContrastiveNet, FullSSLNet, BarlowTwinsContrastiveTripletNet
+from ablation_models import BarlowTwinsDBRatioNet, ContrastiveTripletNet, DBRatioContrastiveNet, FullSSLNet, BarlowTwinsContrastiveTripletNet
 from torch.utils.data import WeightedRandomSampler, DataLoader
 from datasets import Dataset
 from sklearn.metrics import balanced_accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
