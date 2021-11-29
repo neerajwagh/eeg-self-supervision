@@ -134,7 +134,7 @@ def _eval_downstream_task(index_df, dataset, task):
 	print(f"len heldout_window_idx:{len(heldout_window_idx)}")
 	
 	#load corresponding model
-	final_model = joblib.load(f'models/{dataset}_{task}_linear.pkl', mmap_mode='r')
+	final_model = joblib.load(f'finetuned_models/{dataset}_{task}_linear.pkl', mmap_mode='r')
 
 	heldout_indices_all = []
 	X_list, y_list = [], []

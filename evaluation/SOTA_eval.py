@@ -155,7 +155,7 @@ if __name__ == '__main__':
 	model.fc.bias.data.zero_()
 
 	# load trained model states
-	file = f"models/{dataset}_{_TASK}_sota.ckpt"
+	file = f"finetuned_models/{dataset}_{_TASK}_sota.ckpt"
 	ckpt = torch.load(file, map_location=_TORCH_DEVICE)
 	model.load_state_dict(ckpt['model_state'])
 	model = model.to(_TORCH_DEVICE)
@@ -247,7 +247,6 @@ if __name__ == '__main__':
 					window_indices += batch['window_idx'].tolist()
 					X_batch = batch['feature_data'].to(device=_TORCH_DEVICE, non_blocking=True).float()
 					y_batch = batch['label'].to(device=_TORCH_DEVICE, non_blocking=True)
-					#window_indices += batch.dataset_idx.cpu().numpy().tolist()
 					outputs = model.forward_outputs(X_batch)
 
 					_, predicted = torch.max(outputs.data, 1)
@@ -338,16 +337,12 @@ if __name__ == '__main__':
 	print(f"heldout test patient RECALL: {np.mean(recall_history):.3f}({np.std(recall_history):.4f})")
 	print(f"heldout test patient F-1: {np.mean(f1_history):.3f}({np.std(f1_history):.4f})")
 	print(f"heldout test patient BALANCED ACCURACY: {np.mean(bacc_history):.3f}({np.std(bacc_history):.4f})")
-	# figure = sns.kdeplot(all_auc_patient, color='b', shade=True, label="Density curve of AUC")
 
 	# calculate interval percentile
 	p = ((1.0-alpha)/2.0) * 100
 	lower = max(0.0, np.percentile(auc_patient_history, p))
 	p = (alpha+((1.0-alpha)/2.0)) * 100
 	upper = min(1.0, np.percentile(auc_patient_history, p))
-	
-	# pic_name = "{}_{}_AUC.png".format(_TASK, _MODE)
-	# plt.savefig(pic_name)
 
 	# confidence interval
 	print('%.1f%% AUC confidence interval %.2f%% and %.2f%%' % (alpha*100, lower*100, upper*100))

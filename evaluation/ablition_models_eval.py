@@ -113,8 +113,6 @@ def collect_metrics_heldout(y_probs_test, y_true_test, y_pred_test, sample_indic
 
 if __name__ == '__main__':
 	
-	# time python heldout_run.py --gpu_idx=0 --task=condition --dataset=lemon --mode=FULLSSL 
-
 	parser = argparse.ArgumentParser(description="Execute heldout evaluation.")
 	parser.add_argument('--gpu_idx', type=int, help="Index of GPU device. Default is 0.")
 	parser.add_argument('--task', type=str, help="choose from ...")
@@ -127,7 +125,6 @@ if __name__ == '__main__':
 	_TASK = args.task
 	dataset=args.dataset
 
-	# FIXME: TOML path setup
 	if dataset == "lemon":
 		_INDEX_PATH = "lemon_window_index.csv"
 		_INDEX_DF = pd.read_csv(_INDEX_PATH)
@@ -176,7 +173,7 @@ if __name__ == '__main__':
 	model.fc.bias.data.zero_()
 
 	# load trained model states
-	file = f"models/{dataset}_{_TASK}_{_MODE}.ckpt"
+	file = f"finetuned_models/{dataset}_{_TASK}_{_MODE}.ckpt"
 	ckpt = torch.load(file, map_location=_TORCH_DEVICE)
 	model.load_state_dict(ckpt['model_state'])
 	model = model.to(_TORCH_DEVICE)
@@ -267,7 +264,6 @@ if __name__ == '__main__':
 					window_indices += batch['window_idx'].tolist()
 					X_batch = batch['feature_data'].to(device=_TORCH_DEVICE, non_blocking=True).float()
 					y_batch = batch['label'].to(device=_TORCH_DEVICE, non_blocking=True)
-					#window_indices += batch.dataset_idx.cpu().numpy().tolist()
 					outputs = model(X_batch)
 
 					_, predicted = torch.max(outputs.data, 1)

@@ -140,4 +140,3 @@ def _custom_cv_fold_iterator(train_and_val_subjects, num_folds, task, index_df, 
 		print(f"Fold {fold_idx}: train idx: {len(train_idx)} val idx: {len(val_idx)}")
 
 		yield train_idx, val_idx
-
