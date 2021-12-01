@@ -251,7 +251,7 @@ if __name__ == '__main__':
 		raise ValueError('unknown mode!')
 
 	# load pretrained states
-	ckpt = torch.load(f"pretrained_models/pretrained_{_MODE}.ckpt", map_location=_TORCH_DEVICE)
+	ckpt = torch.load(f"../resources/pretrained_models/pretrained_{_MODE}.ckpt", map_location=_TORCH_DEVICE)
 	model = model.to(_TORCH_DEVICE)
 	model.load_state_dict(ckpt['model_state'])
 	optimizer = torch.optim.SGD(model.parameters(), lr=lr)
@@ -278,10 +278,10 @@ if __name__ == '__main__':
 
 		# load dataset indices
 	if dataset == "lemon":
-		_INDEX_PATH = "lemon_window_index.csv"
+		_INDEX_PATH = "../resources/lemon_window_index.csv"
 		_INDEX_DF = pd.read_csv(_INDEX_PATH)
 	elif dataset == "tuh":
-		_INDEX_PATH = "abnormal_corpus_window_index.csv"
+		_INDEX_PATH = "../resources/abnormal_corpus_window_index.csv"
 		_INDEX_DF = pd.read_csv(_INDEX_PATH)
 		_INDEX_DF['parsed_age_binary'] = _INDEX_DF['parsed_age'].map(_map_age)
 	else:
@@ -289,7 +289,7 @@ if __name__ == '__main__':
 
 	#load X, y
 	print("Loading data...")
-	X = np.load(f'topo_data_{dataset}.npy', mmap_mode='r').astype(np.float32)		
+	X = np.load(f'../resources/topo_data_{dataset}.npy', mmap_mode='r').astype(np.float32)		
 	print("Loading done.")
 
 	if dataset == 'tuh':

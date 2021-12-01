@@ -124,10 +124,10 @@ if __name__ == '__main__':
 
 	# FIXME: TOML path setup
 	if dataset == "lemon":
-		_INDEX_PATH = "lemon_window_index.csv"
+		_INDEX_PATH = "../resources/lemon_window_index.csv"
 		_INDEX_DF = pd.read_csv(_INDEX_PATH)
 	elif dataset == "tuh":
-		_INDEX_PATH = "abnormal_corpus_window_index.csv"
+		_INDEX_PATH = "../resources/abnormal_corpus_window_index.csv"
 		_INDEX_DF = pd.read_csv(_INDEX_PATH)
 		_INDEX_DF['parsed_age_binary'] = _INDEX_DF['parsed_age'].map(_map_age)
 	else:
@@ -155,7 +155,7 @@ if __name__ == '__main__':
 	model.fc.bias.data.zero_()
 
 	# load trained model states
-	file = f"finetuned_models/{dataset}_{_TASK}_sota.ckpt"
+	file = f"../resources/finetuned_models/{dataset}_{_TASK}_sota.ckpt"
 	ckpt = torch.load(file, map_location=_TORCH_DEVICE)
 	model.load_state_dict(ckpt['model_state'])
 	model = model.to(_TORCH_DEVICE)
@@ -165,7 +165,7 @@ if __name__ == '__main__':
 
 	#load X, y
 	print("Loading data...")
-	X = np.load(f'preproc_timeseries_{dataset}.npy', mmap_mode='r').astype(np.float32)		
+	X = np.load(f'../resources/preproc_timeseries_{dataset}.npy', mmap_mode='r').astype(np.float32)		
 	print("Loading done.")
 	
 	#load index file

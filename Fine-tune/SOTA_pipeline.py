@@ -212,7 +212,7 @@ if __name__ == '__main__':
 	_EPOCH = 1511
 	lr = 0.002
 	
-	# creat directories to store checkpoints
+	# create directories to store checkpoints
 	if not os.path.exists(f"{dataset}_{_TASK}_SOTA"):
 		os.makedirs(f"{dataset}_{_TASK}_SOTA", exist_ok=True)
 
@@ -230,7 +230,7 @@ if __name__ == '__main__':
 	torch.cuda.empty_cache()
 	print(f'Using device: {_TORCH_DEVICE}, {torch.cuda.get_device_name(_TORCH_DEVICE)}')
 
-	ckpt = torch.load("pretrained_models/pretrained_SOTA.ckpt", map_location=_TORCH_DEVICE)
+	ckpt = torch.load("../resources/pretrained_models/pretrained_SOTA.ckpt", map_location=_TORCH_DEVICE)
 	model = RelativePositioningShallowNet(args_p)
 
 	model = model.to(_TORCH_DEVICE)
@@ -258,10 +258,10 @@ if __name__ == '__main__':
 
 	# load dataset indices
 	if dataset == "lemon":
-		_INDEX_PATH = "lemon_window_index.csv"
+		_INDEX_PATH = "../resources/lemon_window_index.csv"
 		_INDEX_DF = pd.read_csv(_INDEX_PATH)
 	elif dataset == "tuh":
-		_INDEX_PATH = "abnormal_corpus_window_index.csv"
+		_INDEX_PATH = "../resources/abnormal_corpus_window_index.csv"
 		_INDEX_DF = pd.read_csv(_INDEX_PATH)
 		_INDEX_DF['parsed_age_binary'] = _INDEX_DF['parsed_age'].map(_map_age)
 	else:
@@ -269,7 +269,7 @@ if __name__ == '__main__':
 
 	#load X, y
 	print("Loading data...")
-	X = np.load(f'preproc_timeseries_{dataset}.npy', mmap_mode='r').astype(np.float32)		
+	X = np.load(f'../resources/preproc_timeseries_{dataset}.npy', mmap_mode='r').astype(np.float32)		
 	print("Loading done.")
 
 	if dataset == 'tuh':

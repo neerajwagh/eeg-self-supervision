@@ -13,7 +13,7 @@ from utils import _custom_cv_fold_iterator, _get_subject_level_split, _map_age
 def _train_downstream_task(index_df, task, dataset, seed):
 
 	# load X based on dataset
-	X = np.load(f'psd_bandpower_relative_{dataset}.npy').astype(np.float32)
+	X = np.load(f'../resources/psd_bandpower_relative_{dataset}.npy').astype(np.float32)
 	X = X.reshape(X.shape[0], X.shape[1] * X.shape[2])
 
 	#load y based on given dataset and task
@@ -134,10 +134,10 @@ if __name__ == '__main__':
 
 	# load dataset indices
 	if dataset == "lemon":
-		_INDEX_PATH = "lemon_window_index.csv"
+		_INDEX_PATH = "../resources/lemon_window_index.csv"
 		_INDEX_DF = pd.read_csv(_INDEX_PATH)
 	elif dataset == "tuh":
-		_INDEX_PATH = "abnormal_corpus_window_index.csv"
+		_INDEX_PATH = "../resources/abnormal_corpus_window_index.csv"
 		_INDEX_DF = pd.read_csv(_INDEX_PATH)
 		_INDEX_DF['parsed_age_binary'] = _INDEX_DF['parsed_age'].map(_map_age)
 	else:

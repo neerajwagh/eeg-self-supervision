@@ -86,7 +86,7 @@ def collect_metrics_heldout(y_probs_test, y_true_test, y_pred_test, sample_indic
 
 def _eval_downstream_task(index_df, dataset, task):
 
-	X = np.load(f'psd_bandpower_relative_{dataset}.npy').astype(np.float32)
+	X = np.load(f'../resources/psd_bandpower_relative_{dataset}.npy').astype(np.float32)
 	X = X.reshape(X.shape[0], X.shape[1] * X.shape[2])
 
 	#load data index file
@@ -134,7 +134,7 @@ def _eval_downstream_task(index_df, dataset, task):
 	print(f"len heldout_window_idx:{len(heldout_window_idx)}")
 	
 	#load corresponding model
-	final_model = joblib.load(f'finetuned_models/{dataset}_{task}_linear.pkl', mmap_mode='r')
+	final_model = joblib.load(f'../resources/finetuned_models/{dataset}_{task}_linear.pkl', mmap_mode='r')
 
 	heldout_indices_all = []
 	X_list, y_list = [], []
@@ -248,10 +248,10 @@ if __name__ == '__main__':
 
 	# load dataset indices
 	if dataset == "lemon":
-		_INDEX_PATH = "lemon_window_index.csv"
+		_INDEX_PATH = "../resources/lemon_window_index.csv"
 		_INDEX_DF = pd.read_csv(_INDEX_PATH)
 	elif dataset == "tuh":
-		_INDEX_PATH = "abnormal_corpus_window_index.csv"
+		_INDEX_PATH = "../resources/abnormal_corpus_window_index.csv"
 		_INDEX_DF = pd.read_csv(_INDEX_PATH)
 		_INDEX_DF['parsed_age_binary'] = _INDEX_DF['parsed_age'].map(_map_age)
 	else:
