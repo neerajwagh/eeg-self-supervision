@@ -64,11 +64,20 @@ python ablation_pipeline.py --gpu_idx={desired gpu index} --dataset={wanted data
 ```python
 python SOTA_pipeline.py --gpu_idx={desired gpu index} --dataset={wanted dataset} --task={wanted task}
 ```
+
+### How to Perform Supervised Learning for Downstream Tasks
+1. Download pre-computed feature arrays, training metadata from [Box](https://uofi.box.com/s/80lygevy4d7mc3nwne8267wlkcjiun0v).
+2. Place both psd_bandpower_relative.npy, and metadata files into _supervised_learning_ folder. The code expects these files to be present in _supervised_learning_ folder.
+3. Enter _supervised_learning_ folder.
+4. To train the supervised learning pipeline, run the following command:
+```python
+python linear_baseline_train.py --dataset={wanted dataset} --task={wanted task}
+```
 ### How to Perform Pre-training using Domain-guided Self-superivsed Tasks
 1. Enter _Pretrain_ folder.
 2. Run the following command:
 ```python
-python pretrain.py --gpu_idx={desired gpu index} --mode={Wanted ablation model}
+python pretrain.py --gpu_idx={desired gpu index} --mode={wanted ablation model}
 ```
 
 ### Contact
