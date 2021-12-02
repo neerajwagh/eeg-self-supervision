@@ -5,7 +5,6 @@ class Dataset(torch.utils.data.Dataset):
     def __init__(self, window_idx, X, y):
         self.window_idx = window_idx
         self.topo_data = X
-        #self.topo_data = np.load(f'/home/varatha2/projects/john_wei/eeg-feature-extractor/data/topo_data.npy', mmap_mode='r')
         self.labels = y
     
     def __len__(self):
